@@ -18,8 +18,11 @@ function submit(e) {
 
     // add also after submit
     const button = document.createElement('button');
+    const button1 = document.createElement('button');
     button.className = 'btn btn-danger btn-sm float-right delete';
+    button1.className = 'btn btn-primary btn-sm float-right delete';
     button.appendChild(document.createTextNode('delete'));
+    button1.appendChild(document.createTextNode('edit'));
 
     const x = document.createElement('h4');
     x.className = 'h4';
@@ -27,6 +30,8 @@ function submit(e) {
 
     x.appendChild(nameText);
     x.appendChild(button);
+    x.appendChild(button1);
+
     const submit = document.querySelector('.btn');
     submit.after(x);
 
@@ -34,6 +39,20 @@ function submit(e) {
         e.preventDefault();
 
         localStorage.removeItem(name);
-        document.querySelector('.h4').innerHTML = " ";
+        x.removeChild(nameText);
+        x.removeChild(button);
+        x.removeChild(button1);
+    }
+    button1.onclick = function (el){
+        el.preventDefault();
+
+        document.querySelector('#name').value = obj.name;
+        document.querySelector('#email').value = obj.email;
+        document.querySelector('#number').value = obj.number;
+
+        localStorage.removeItem(name);
+        x.removeChild(nameText);
+        x.removeChild(button);
+        x.removeChild(button1);
     }
 }
